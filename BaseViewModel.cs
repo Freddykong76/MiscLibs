@@ -1,32 +1,15 @@
-﻿using ODIN.DesignPattern.Observer;
+
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 namespace MiscLibs
 {
-    abstract class BaseViewModel : INotifyPropertyChanged, ISubject, IObserver, IChangeTracking
+    abstract class BaseViewModel : INotifyPropertyChanged
     {
         #region Fields
         public event PropertyChangedEventHandler PropertyChanged;
-        private List<IObserver> _observers = new List<IObserver>();
-        protected bool _IsChanged = false;
         #endregion
         #region Properties
-        public virtual bool IsChanged
-        {
-            get
-            {
-                return _IsChanged;
-            }
-            set
-            {
-                if (_IsChanged != value)
-                {
-                    _IsChanged = value;
-                    Notify();
-                }
-            }
-        }
         #endregion
         #region Methods
         protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
@@ -74,10 +57,6 @@ namespace MiscLibs
                 IsChanged = (subject as BaseViewModel).IsChanged;
                 //Notify();
             }
-        }
-        public virtual void AcceptChanges()
-        {
-            IsChanged = false;
         }
         #endregion
     }
