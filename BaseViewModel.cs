@@ -33,31 +33,6 @@ namespace MiscLibs
             return true;
 
         }
-        public void Attach(IObserver observer)
-        {
-            _observers.Add(observer);
-        }
-
-        public void Detach(IObserver observer)
-        {
-            _observers.Remove(observer);
-        }
-
-        public virtual void Notify()
-        {
-            foreach (IObserver element in _observers)
-            {
-                element.Update(this);
-            }
-        }
-        public virtual void Update(ISubject subject)
-        {
-            if (subject is BaseViewModel)
-            {
-                IsChanged = (subject as BaseViewModel).IsChanged;
-                //Notify();
-            }
-        }
         #endregion
     }
 }
